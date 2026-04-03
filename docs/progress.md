@@ -19,7 +19,7 @@
 | # | Task | Status | Commit |
 |---|------|--------|--------|
 | 1 | Project Scaffold | ✅ Done | 8750b54 |
-| 2 | Database Schema, RLS, and Functions | ⏳ Pending | — |
+| 2 | Database Schema, RLS, and Functions | ✅ Done | 022502b |
 | 3 | Supabase Clients and Auth Utilities | ⏳ Pending | — |
 | 4 | Auth Server Actions | ⏳ Pending | — |
 | 5 | Auth Pages (Landing + Login/Signup) | ⏳ Pending | — |
@@ -41,3 +41,4 @@
 - Env vars needed in `.env.local`: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`
 - **shadcn/ui style is `base-nova` (Base UI primitives)** — not the Radix-backed Default style. All future `shadcn add` commands will use this style.
 - **Stack is Next.js 16.2.2 + Tailwind v4** — future tasks must use Tailwind v4 CSS-based config (no `tailwind.config.ts`, use `@theme` directive in CSS)
+- **`claim_slot` RPC takes only `p_slot_id`** — rushee ID derived from `auth.uid()` internally. Must be called via the **user session client** (`createClient()` from `lib/supabase/server.ts`), NOT the admin client. Plan updated to reflect this.

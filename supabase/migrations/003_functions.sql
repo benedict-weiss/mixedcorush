@@ -23,22 +23,31 @@ CREATE OR REPLACE TRIGGER on_auth_user_created
   EXECUTE FUNCTION handle_new_user();
 
 -- RPC: atomically release prior slot and claim a new one
--- Called server-side only; p_rushee_id comes from the auth session, never the request body.
-CREATE OR REPLACE FUNCTION claim_slot(p_slot_id UUID, p_rushee_id UUID)
+-- Derives the caller's identity from auth.uid() internally — never accepts a rushee ID
+-- from the caller, so this cannot be spoofed even if the RPC endpoint is publicly reachable.
+CREATE OR REPLACE FUNCTION claim_slot(p_slot_id UUID)
 RETURNS VOID
 LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path = public
 AS $$
+DECLARE
+  v_rushee_id UUID;
 BEGIN
+  v_rushee_id := auth.uid();
+
+  IF v_rushee_id IS NULL THEN
+    RAISE EXCEPTION 'not_authenticated';
+  END IF;
+
   -- Release any slot currently held by this rushee
   UPDATE audition_slots
   SET rushee_id = NULL
-  WHERE rushee_id = p_rushee_id;
+  WHERE rushee_id = v_rushee_id;
 
   -- Claim the target slot if it is still available
   UPDATE audition_slots
-  SET rushee_id = p_rushee_id
+  SET rushee_id = v_rushee_id
   WHERE id = p_slot_id
     AND rushee_id IS NULL;
 

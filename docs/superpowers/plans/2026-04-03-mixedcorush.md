@@ -322,22 +322,31 @@ CREATE OR REPLACE TRIGGER on_auth_user_created
   EXECUTE FUNCTION handle_new_user();
 
 -- RPC: atomically release prior slot and claim a new one
--- Called server-side only; p_rushee_id comes from the auth session, never the request body.
-CREATE OR REPLACE FUNCTION claim_slot(p_slot_id UUID, p_rushee_id UUID)
+-- Derives rushee identity from auth.uid() internally — no caller-supplied rushee ID.
+-- Must be called via the user session client so auth.uid() resolves correctly.
+CREATE OR REPLACE FUNCTION claim_slot(p_slot_id UUID)
 RETURNS VOID
 LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path = public
 AS $$
+DECLARE
+  v_rushee_id UUID;
 BEGIN
+  v_rushee_id := auth.uid();
+
+  IF v_rushee_id IS NULL THEN
+    RAISE EXCEPTION 'not_authenticated';
+  END IF;
+
   -- Release any slot currently held by this rushee
   UPDATE audition_slots
   SET rushee_id = NULL
-  WHERE rushee_id = p_rushee_id;
+  WHERE rushee_id = v_rushee_id;
 
   -- Claim the target slot if it is still available
   UPDATE audition_slots
-  SET rushee_id = p_rushee_id
+  SET rushee_id = v_rushee_id
   WHERE id = p_slot_id
     AND rushee_id IS NULL;
 
@@ -1177,10 +1186,10 @@ export async function claimSlot(slotId: string): Promise<SlotActionState> {
     return { error: 'Not authenticated' }
   }
 
-  const admin = createAdminClient()
-  const { error } = await admin.rpc('claim_slot', {
+  // claim_slot derives rushee identity from auth.uid() internally — pass only p_slot_id.
+  // Must use the user session client (not admin) so auth.uid() resolves correctly inside the RPC.
+  const { error } = await supabase.rpc('claim_slot', {
     p_slot_id: slotId,
-    p_rushee_id: user.id,
   })
 
   if (error) {
