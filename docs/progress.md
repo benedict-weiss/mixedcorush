@@ -18,7 +18,7 @@
 
 | # | Task | Status | Commit |
 |---|------|--------|--------|
-| 1 | Project Scaffold | ⏳ Pending | — |
+| 1 | Project Scaffold | ✅ Done | 8750b54 |
 | 2 | Database Schema, RLS, and Functions | ⏳ Pending | — |
 | 3 | Supabase Clients and Auth Utilities | ⏳ Pending | — |
 | 4 | Auth Server Actions | ⏳ Pending | — |
@@ -39,3 +39,5 @@
 - Task 2 is SQL-only — no code changes, but SQL must be run before Task 3 onwards will work
 - Admin accounts: sign up normally, then set `role = 'ADMIN'` in Supabase table editor
 - Env vars needed in `.env.local`: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`
+- **shadcn/ui style is `base-nova` (Base UI primitives)** — not the Radix-backed Default style. All future `shadcn add` commands will use this style.
+- **Stack is Next.js 16.2.2 + Tailwind v4** — future tasks must use Tailwind v4 CSS-based config (no `tailwind.config.ts`, use `@theme` directive in CSS)
