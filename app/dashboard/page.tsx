@@ -15,7 +15,7 @@ export default async function DashboardPage() {
     .maybeSingle()
 
   return (
-    <main className="min-h-screen p-8 max-w-2xl mx-auto">
+    <main className="min-h-screen p-8 max-w-3xl mx-auto">
       {/* Header */}
       <div className="flex items-start justify-between mb-10">
         <div>
@@ -76,7 +76,7 @@ export default async function DashboardPage() {
       <div className="flex flex-col gap-3 sm:flex-row">
         <Link
           href="/schedule"
-          className={buttonVariants({ className: 'flex-1 tracking-widest uppercase text-xs' })}
+          className={buttonVariants({ variant: 'outline', className: 'flex-1 tracking-widest uppercase text-xs' })}
         >
           View Schedule
         </Link>
