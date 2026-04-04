@@ -31,7 +31,7 @@
 | 11 | Admin — Manage Slots | ✅ Done | 7cb3a95 |
 | 12 | Admin — Manage Materials (with Storage) | ✅ Done | cd3d684 |
 | 13 | Admin — Manage FAQs | ✅ Done | 4194c45 |
-| 14 | Production Hardening | ⏳ Pending | — |
+| 14 | Production Hardening | ✅ Done | 127e3e5 |
 
 ## Notes
 
