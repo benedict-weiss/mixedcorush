@@ -29,7 +29,7 @@
 | 9 | Admin Layout and Dashboard | ✅ Done | 4f7a0e3 |
 | 10 | Admin — Manage Rushees | ✅ Done | 9fd42a4 |
 | 11 | Admin — Manage Slots | ✅ Done | 7cb3a95 |
-| 12 | Admin — Manage Materials (with Storage) | ⏳ Pending | — |
+| 12 | Admin — Manage Materials (with Storage) | ✅ Done | cd3d684 |
 | 13 | Admin — Manage FAQs | ⏳ Pending | — |
 | 14 | Production Hardening | ⏳ Pending | — |
 
