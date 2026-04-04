@@ -24,7 +24,7 @@
 | 4 | Auth Server Actions | ✅ Done | 8084ddb |
 | 5 | Auth Pages (Landing + Login/Signup) | ✅ Done | 6269620 |
 | 6 | Rushee Dashboard | ✅ Done | 72176a6 |
-| 7 | Schedule Page (Slot Claim/Release) | ⏳ Pending | — |
+| 7 | Schedule Page (Slot Claim/Release) | ✅ Done | 7a7de47 |
 | 8 | Materials and FAQ Pages | ⏳ Pending | — |
 | 9 | Admin Layout and Dashboard | ⏳ Pending | — |
 | 10 | Admin — Manage Rushees | ⏳ Pending | — |
