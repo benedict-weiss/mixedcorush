@@ -1,6 +1,6 @@
 # Mixed Company Rush App
 
-A secure audition scheduling web app for [Mixed Company of Yale](https://mixedcompanyofyale.com). Replaces a manual workflow (forms, spreadsheets, email) for ~100–150 rushees per rush cycle.
+An audition scheduling web app for [Mixed Company of Yale](https://mixedcompanyofyale.com).
 
 ## Features
 
