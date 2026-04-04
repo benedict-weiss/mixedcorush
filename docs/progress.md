@@ -21,7 +21,7 @@
 | 1 | Project Scaffold | ✅ Done | 8750b54 |
 | 2 | Database Schema, RLS, and Functions | ✅ Done | 022502b |
 | 3 | Supabase Clients and Auth Utilities | ✅ Done | f80bf3f |
-| 4 | Auth Server Actions | ⏳ Pending | — |
+| 4 | Auth Server Actions | ✅ Done | 8084ddb |
 | 5 | Auth Pages (Landing + Login/Signup) | ⏳ Pending | — |
 | 6 | Rushee Dashboard | ⏳ Pending | — |
 | 7 | Schedule Page (Slot Claim/Release) | ⏳ Pending | — |
