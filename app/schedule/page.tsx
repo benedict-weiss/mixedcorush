@@ -40,8 +40,11 @@ export default async function SchedulePage() {
 
   return (
     <main className="min-h-screen p-8 max-w-2xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="font-display text-4xl tracking-wide leading-none">Audition Schedule</h1>
+      <div className="flex items-center justify-between mb-10">
+        <div>
+          <p className="text-xs tracking-[0.4em] uppercase text-primary mb-1">Mixed Company</p>
+          <h1 className="font-display text-4xl tracking-wide leading-none">Audition Schedule</h1>
+        </div>
         <Link href="/dashboard" className={buttonVariants({ variant: 'outline', size: 'sm' })}>
           ← Dashboard
         </Link>

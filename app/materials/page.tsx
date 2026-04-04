@@ -25,8 +25,11 @@ export default async function MaterialsPage() {
 
   return (
     <main className="min-h-screen p-8 max-w-2xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="font-display text-4xl tracking-wide leading-none">Audition Materials</h1>
+      <div className="flex items-center justify-between mb-10">
+        <div>
+          <p className="text-xs tracking-[0.4em] uppercase text-primary mb-1">Mixed Company</p>
+          <h1 className="font-display text-4xl tracking-wide leading-none">Audition Materials</h1>
+        </div>
         <Link href="/dashboard" className={buttonVariants({ variant: 'outline', size: 'sm' })}>
           ← Dashboard
         </Link>
@@ -35,7 +38,7 @@ export default async function MaterialsPage() {
       {!materials || materials.length === 0 ? (
         <p className="text-muted-foreground">No materials have been uploaded yet.</p>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-2">
           {materials.map((material) => (
             <MaterialRow
               key={material.id}
@@ -65,8 +68,9 @@ async function MaterialRow({
   const { url } = await getSignedUrl(storagePath)
 
   return (
-    <div className="flex items-center justify-between p-4 rounded-lg border">
-      <div className="space-y-1">
+    <div className="relative flex items-center justify-between p-4 border border-border overflow-hidden">
+      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-primary/60" aria-hidden="true" />
+      <div className="space-y-1 pl-2">
         <p className="font-medium">{title}</p>
         <div className="flex gap-2">
           <Badge variant="outline">{voicePart}</Badge>

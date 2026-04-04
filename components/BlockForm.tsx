@@ -43,7 +43,7 @@ export function BlockForm({ blocks }: { blocks: Block[] }) {
     <div className="max-w-2xl space-y-8">
       <Card>
         <CardHeader>
-          <CardTitle>Create Audition Block</CardTitle>
+          <CardTitle className="font-display text-2xl tracking-wide leading-none">Create Audition Block</CardTitle>
         </CardHeader>
         <CardContent>
           <form action={action} className="space-y-4">
@@ -84,7 +84,7 @@ export function BlockForm({ blocks }: { blocks: Block[] }) {
       </Card>
 
       <div>
-        <h2 className="mb-4 text-lg font-semibold">Existing Blocks</h2>
+        <h2 className="mb-4 font-display text-2xl tracking-wide leading-none">Existing Blocks</h2>
         {blocks.length === 0 ? (
           <p className="text-muted-foreground">No blocks yet.</p>
         ) : (

@@ -44,10 +44,10 @@ export function SlotList({
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       {blocks.map((block) => (
         <div key={block.id}>
-          <h2 className="text-lg font-semibold mb-3">
+          <h2 className="font-display text-2xl tracking-wide leading-none mb-4">
             {new Date(`${block.date}T00:00:00`).toLocaleDateString([], {
               weekday: 'long',
               month: 'long',
@@ -63,39 +63,59 @@ export function SlotList({
               return (
                 <div
                   key={slot.id}
-                  className={`flex items-center justify-between rounded-lg border p-3 ${
+                  className={`relative flex items-center justify-between border p-3 overflow-hidden transition-opacity ${
                     isMine
-                      ? 'border-primary bg-primary/5'
+                      ? 'border-primary/40 bg-primary/5'
                       : isTaken
-                        ? 'border-border bg-muted opacity-50'
-                        : 'border-border'
+                        ? 'border-border opacity-40'
+                        : 'border-border hover:border-border/60'
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="text-sm">
+                  {isMine && (
+                    <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-primary" aria-hidden="true" />
+                  )}
+                  <div className="flex items-center gap-3 pl-1">
+                    <span className="text-sm tabular-nums">
                       {new Date(slot.start_time).toLocaleTimeString([], {
                         hour: '2-digit',
                         minute: '2-digit',
                       })}
-                      {' - '}
+                      {' – '}
                       {new Date(slot.end_time).toLocaleTimeString([], {
                         hour: '2-digit',
                         minute: '2-digit',
                       })}
                     </span>
-                    {isMine ? <Badge variant="default">Your slot</Badge> : null}
-                    {isTaken ? <Badge variant="secondary">Taken</Badge> : null}
+                    {isMine ? (
+                      <Badge variant="default" className="text-xs tracking-widest uppercase">
+                        Your slot
+                      </Badge>
+                    ) : null}
+                    {isTaken ? (
+                      <Badge variant="secondary" className="text-xs tracking-widest uppercase">
+                        Taken
+                      </Badge>
+                    ) : null}
                   </div>
 
                   <div>
                     {isMine ? (
-                      <Button size="sm" variant="outline" onClick={handleRelease} disabled={isPending}>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={handleRelease}
+                        disabled={isPending}
+                      >
                         Release
                       </Button>
                     ) : null}
                     {isAvailable ? (
-                      <Button size="sm" onClick={() => handleClaim(slot.id)} disabled={isPending}>
-                        {mySlotId ? 'Switch to this slot' : 'Claim'}
+                      <Button
+                        size="sm"
+                        onClick={() => handleClaim(slot.id)}
+                        disabled={isPending}
+                      >
+                        {mySlotId ? 'Switch' : 'Claim'}
                       </Button>
                     ) : null}
                   </div>

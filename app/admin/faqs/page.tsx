@@ -18,7 +18,7 @@ export default async function AdminFaqsPage() {
 
   return (
     <div>
-      <h1 className="mb-6 text-2xl font-bold">Manage FAQs</h1>
+      <h1 className="font-display text-4xl tracking-wide leading-none mb-6">Manage FAQs</h1>
       <FaqEditor faqs={(faqs as Faq[] | null) ?? []} />
     </div>
   )

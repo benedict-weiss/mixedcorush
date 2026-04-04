@@ -29,7 +29,7 @@ export function LoginForm({ defaultTab = 'login' }: { defaultTab?: string }) {
       <TabsContent value="login">
         <Card>
           <CardHeader>
-            <CardTitle>Welcome back</CardTitle>
+            <CardTitle className="font-display text-3xl tracking-wide leading-none">Welcome back</CardTitle>
           </CardHeader>
           <CardContent>
             <form action={logInAction} className="space-y-4">
@@ -67,7 +67,7 @@ export function LoginForm({ defaultTab = 'login' }: { defaultTab?: string }) {
       <TabsContent value="signup">
         <Card>
           <CardHeader>
-            <CardTitle>Create your account</CardTitle>
+            <CardTitle className="font-display text-3xl tracking-wide leading-none">Create your account</CardTitle>
           </CardHeader>
           <CardContent>
             <form action={signUpAction} className="space-y-4">

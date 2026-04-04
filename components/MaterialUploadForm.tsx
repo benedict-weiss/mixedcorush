@@ -50,7 +50,7 @@ export function MaterialUploadForm({ materials }: { materials: Material[] }) {
     <div className="max-w-2xl space-y-8">
       <Card>
         <CardHeader>
-          <CardTitle>Upload Material</CardTitle>
+          <CardTitle className="font-display text-2xl tracking-wide leading-none">Upload Material</CardTitle>
         </CardHeader>
         <CardContent>
           <form action={action} className="space-y-4" encType="multipart/form-data">
@@ -92,7 +92,7 @@ export function MaterialUploadForm({ materials }: { materials: Material[] }) {
       </Card>
 
       <div>
-        <h2 className="mb-4 text-lg font-semibold">Uploaded Materials</h2>
+        <h2 className="mb-4 font-display text-2xl tracking-wide leading-none">Uploaded Materials</h2>
         {materials.length === 0 ? (
           <p className="text-muted-foreground">No materials yet.</p>
         ) : (

@@ -95,7 +95,7 @@ export function FaqEditor({ faqs }: { faqs: Faq[] }) {
     <div className="max-w-2xl space-y-8">
       <Card>
         <CardHeader>
-          <CardTitle>Add FAQ</CardTitle>
+          <CardTitle className="font-display text-2xl tracking-wide leading-none">Add FAQ</CardTitle>
         </CardHeader>
         <CardContent>
           <form action={createAction} className="space-y-4">
@@ -116,7 +116,7 @@ export function FaqEditor({ faqs }: { faqs: Faq[] }) {
       </Card>
 
       <div>
-        <h2 className="mb-4 text-lg font-semibold">FAQs</h2>
+        <h2 className="mb-4 font-display text-2xl tracking-wide leading-none">FAQs</h2>
         {faqs.length === 0 ? (
           <p className="text-muted-foreground">No FAQs yet.</p>
         ) : (

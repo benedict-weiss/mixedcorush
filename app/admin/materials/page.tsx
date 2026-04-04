@@ -19,7 +19,7 @@ export default async function AdminMaterialsPage() {
 
   return (
     <div>
-      <h1 className="mb-6 text-2xl font-bold">Manage Materials</h1>
+      <h1 className="font-display text-4xl tracking-wide leading-none mb-6">Manage Materials</h1>
       <MaterialUploadForm materials={(materials as Material[] | null) ?? []} />
     </div>
   )
