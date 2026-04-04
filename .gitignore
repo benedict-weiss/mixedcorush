@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# project docs and config
+docs/
+.mcp.json
+AGENTS.md
+CLAUDE.md
+mixedco-rush-claude-code-brief.md
+mixedco-rush-secure-prd.md
