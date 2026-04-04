@@ -15,7 +15,7 @@ export default async function DashboardPage() {
     .maybeSingle()
 
   return (
-    <main className="min-h-screen p-8 max-w-3xl mx-auto">
+    <main className="min-h-screen flex flex-col justify-center p-8 max-w-3xl mx-auto">
       {/* Header */}
       <div className="flex items-start justify-between mb-10">
         <div>

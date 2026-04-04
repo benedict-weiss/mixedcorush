@@ -39,7 +39,7 @@ export default async function SchedulePage() {
   }))
 
   return (
-    <main className="min-h-screen p-8 max-w-3xl mx-auto">
+    <main className="min-h-screen flex flex-col justify-center p-8 max-w-3xl mx-auto">
       <div className="flex items-center justify-between mb-10">
         <div>
           <p className="text-xs tracking-[0.4em] uppercase text-primary mb-1">Mixed Company</p>
