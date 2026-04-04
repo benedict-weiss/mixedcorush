@@ -25,7 +25,7 @@
 | 5 | Auth Pages (Landing + Login/Signup) | ✅ Done | 6269620 |
 | 6 | Rushee Dashboard | ✅ Done | 72176a6 |
 | 7 | Schedule Page (Slot Claim/Release) | ✅ Done | 7a7de47 |
-| 8 | Materials and FAQ Pages | ⏳ Pending | — |
+| 8 | Materials and FAQ Pages | ✅ Done | f9fbd76 |
 | 9 | Admin Layout and Dashboard | ⏳ Pending | — |
 | 10 | Admin — Manage Rushees | ⏳ Pending | — |
 | 11 | Admin — Manage Slots | ⏳ Pending | — |
