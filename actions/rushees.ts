@@ -4,10 +4,11 @@ import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
 import { requireAdmin } from '@/lib/auth'
 import { createAdminClient } from '@/lib/supabase/admin'
+import { VOICE_PARTS } from '@/lib/voice-parts'
 
 const assignSchema = z.object({
   rusheeId: z.string().uuid(),
-  voicePart: z.string().min(1).max(50),
+  voicePart: z.enum(VOICE_PARTS),
 })
 
 export type RusheeActionState = { error?: string; success?: boolean } | undefined

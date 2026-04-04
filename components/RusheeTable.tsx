@@ -3,7 +3,13 @@
 import { useActionState } from 'react'
 import { assignVoicePart, type RusheeActionState } from '@/actions/rushees'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import {
   Table,
   TableBody,
@@ -12,6 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { VOICE_PARTS } from '@/lib/voice-parts'
 
 type Rushee = {
   id: string
@@ -48,12 +55,18 @@ function RusheeRow({ rushee }: { rushee: Rushee }) {
       <TableCell>
         <form action={action} className="flex items-center gap-2">
           <input type="hidden" name="rusheeId" value={rushee.id} />
-          <Input
-            name="voicePart"
-            defaultValue={rushee.voice_part ?? ''}
-            placeholder="e.g. Soprano 1"
-            className="h-8 text-sm w-36"
-          />
+          <Select name="voicePart" defaultValue={rushee.voice_part ?? undefined}>
+            <SelectTrigger size="sm" className="w-32">
+              <SelectValue placeholder="Assign…" />
+            </SelectTrigger>
+            <SelectContent>
+              {VOICE_PARTS.map((part) => (
+                <SelectItem key={part} value={part}>
+                  {part}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           <Button size="sm" type="submit" disabled={pending}>
             {pending ? '…' : 'Save'}
           </Button>

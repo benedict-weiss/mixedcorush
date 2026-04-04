@@ -6,6 +6,7 @@ import { requireAdmin } from '@/lib/auth'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
 import { getFileType, validateMaterialFile } from '@/lib/validateMaterialFile'
+import { VOICE_PARTS } from '@/lib/voice-parts'
 
 const storagePathSchema = z.string().min(1).max(500)
 
@@ -50,8 +51,8 @@ export async function uploadMaterial(
   if (typeof title !== 'string' || title.trim().length === 0) {
     return { error: 'Title is required.' }
   }
-  if (typeof voicePart !== 'string' || voicePart.trim().length === 0) {
-    return { error: 'Voice part is required.' }
+  if (!VOICE_PARTS.includes(voicePart as (typeof VOICE_PARTS)[number])) {
+    return { error: 'Invalid voice part.' }
   }
   if (!(file instanceof File)) {
     return { error: 'File is required.' }

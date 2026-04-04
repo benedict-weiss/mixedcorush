@@ -7,6 +7,14 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { VOICE_PARTS } from '@/lib/voice-parts'
 
 type Material = {
   id: string
@@ -52,7 +60,18 @@ export function MaterialUploadForm({ materials }: { materials: Material[] }) {
             </div>
             <div className="space-y-1">
               <Label htmlFor="voicePart">Voice Part</Label>
-              <Input id="voicePart" name="voicePart" placeholder="e.g. Soprano 1" required />
+              <Select name="voicePart">
+                <SelectTrigger id="voicePart" className="w-full">
+                  <SelectValue placeholder="Select voice part" />
+                </SelectTrigger>
+                <SelectContent>
+                  {VOICE_PARTS.map((part) => (
+                    <SelectItem key={part} value={part}>
+                      {part}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             <div className="space-y-1">
               <Label htmlFor="file">File (PDF ≤ 20MB or audio ≤ 50MB)</Label>
