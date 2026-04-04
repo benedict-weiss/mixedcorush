@@ -27,7 +27,7 @@
 | 7 | Schedule Page (Slot Claim/Release) | ✅ Done | 7a7de47 |
 | 8 | Materials and FAQ Pages | ✅ Done | f9fbd76 |
 | 9 | Admin Layout and Dashboard | ✅ Done | 4f7a0e3 |
-| 10 | Admin — Manage Rushees | ⏳ Pending | — |
+| 10 | Admin — Manage Rushees | ✅ Done | 9fd42a4 |
 | 11 | Admin — Manage Slots | ⏳ Pending | — |
 | 12 | Admin — Manage Materials (with Storage) | ⏳ Pending | — |
 | 13 | Admin — Manage FAQs | ⏳ Pending | — |
