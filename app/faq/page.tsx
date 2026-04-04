@@ -21,7 +21,7 @@ export default async function FaqPage() {
   return (
     <main className="min-h-screen p-8 max-w-2xl mx-auto">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-bold">FAQ</h1>
+        <h1 className="font-display text-4xl tracking-wide leading-none">FAQ</h1>
         <Link href="/dashboard" className={buttonVariants({ variant: 'outline', size: 'sm' })}>
           ← Dashboard
         </Link>

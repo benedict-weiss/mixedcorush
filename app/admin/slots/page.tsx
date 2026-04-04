@@ -48,7 +48,7 @@ export default async function AdminSlotsPage() {
 
   return (
     <div>
-      <h1 className="mb-6 text-2xl font-bold">Manage Slots</h1>
+      <h1 className="font-display text-4xl tracking-wide leading-none mb-6">Manage Slots</h1>
       <BlockForm blocks={normalizedBlocks} />
     </div>
   )

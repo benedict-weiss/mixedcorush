@@ -25,7 +25,7 @@ export default async function AdminDashboardPage() {
 
   return (
     <div className="max-w-3xl">
-      <h1 className="text-2xl font-bold mb-8">Admin Dashboard</h1>
+      <h1 className="font-display text-4xl tracking-wide leading-none mb-8">Admin Dashboard</h1>
       <div className="grid grid-cols-3 gap-4">
         {stats.map((stat) => (
           <div key={stat.label} className="rounded-lg border p-6">

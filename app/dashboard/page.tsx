@@ -19,7 +19,7 @@ export default async function DashboardPage() {
   return (
     <main className="min-h-screen p-8 max-w-2xl mx-auto">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-bold">Welcome, {profile.name}</h1>
+        <h1 className="font-display text-4xl tracking-wide leading-none">Welcome, {profile.name}</h1>
         <form action={logOut}>
           <button className={buttonVariants({ variant: 'outline', size: 'sm' })} type="submit">
             Log Out

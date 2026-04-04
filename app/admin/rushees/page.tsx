@@ -35,7 +35,7 @@ export default async function AdminRusheesPage() {
 
   return (
     <div className="max-w-5xl">
-      <h1 className="text-2xl font-bold mb-6">Manage Rushees</h1>
+      <h1 className="font-display text-4xl tracking-wide leading-none mb-6">Manage Rushees</h1>
       <RusheeTable rushees={normalized} />
     </div>
   )
