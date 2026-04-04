@@ -61,16 +61,22 @@ export async function logIn(
   }
 
   const supabase = await createClient()
-  const { error } = await supabase.auth.signInWithPassword({
+  const { data, error } = await supabase.auth.signInWithPassword({
     email: parsed.data.email,
     password: parsed.data.password,
   })
 
-  if (error) {
+  if (error || !data.user) {
     return { error: 'Invalid email or password' }
   }
 
-  return redirect('/dashboard')
+  const { data: profile } = await supabase
+    .from('users')
+    .select('role')
+    .eq('id', data.user.id)
+    .single()
+
+  return redirect(profile?.role === 'ADMIN' ? '/admin' : '/dashboard')
 }
 
 export async function logOut(): Promise<void> {
