@@ -51,7 +51,7 @@ export async function uploadMaterial(
   if (typeof title !== 'string' || title.trim().length === 0) {
     return { error: 'Title is required.' }
   }
-  if (!VOICE_PARTS.includes(voicePart as (typeof VOICE_PARTS)[number])) {
+  if (typeof voicePart !== 'string' || !VOICE_PARTS.includes(voicePart as (typeof VOICE_PARTS)[number])) {
     return { error: 'Invalid voice part.' }
   }
   if (!(file instanceof File)) {
