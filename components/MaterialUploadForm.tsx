@@ -53,7 +53,7 @@ export function MaterialUploadForm({ materials }: { materials: Material[] }) {
           <CardTitle className="font-display text-2xl tracking-wide leading-none">Upload Material</CardTitle>
         </CardHeader>
         <CardContent>
-          <form action={action} className="space-y-4" encType="multipart/form-data">
+          <form action={action} className="space-y-4">
             <div className="space-y-1">
               <Label htmlFor="title">Title</Label>
               <Input id="title" name="title" required />

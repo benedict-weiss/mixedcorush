@@ -36,7 +36,7 @@ export default function LandingPage() {
       <div className="relative z-10 text-center px-8 max-w-4xl w-full">
         {/* Eyebrow */}
         <p className="text-xs tracking-[0.6em] uppercase text-primary mb-8 font-medium">
-          Yale&apos;s Premier Co‑Ed A Cappella
+          Yale A Cappella
         </p>
 
         {/* Main wordmark */}
@@ -53,11 +53,6 @@ export default function LandingPage() {
           </span>
           <div className="h-px flex-1 bg-primary max-w-[6rem]" />
         </div>
-
-        {/* Sub-copy */}
-        <p className="text-muted-foreground text-sm leading-relaxed mb-10 max-w-xs mx-auto">
-          Auditions are open. Claim your slot and access materials — all in one place.
-        </p>
 
         {/* CTAs */}
         <div className="flex gap-3 justify-center">

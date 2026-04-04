@@ -39,11 +39,11 @@ export default async function SchedulePage() {
   }))
 
   return (
-    <main className="min-h-screen flex flex-col justify-center p-8 max-w-3xl mx-auto">
-      <div className="flex items-center justify-between mb-10">
+    <main className="min-h-screen flex flex-col justify-center p-12 max-w-5xl mx-auto">
+      <div className="flex items-center justify-between mb-14">
         <div>
-          <p className="text-xs tracking-[0.4em] uppercase text-primary mb-1">Mixed Company</p>
-          <h1 className="font-display text-4xl tracking-wide leading-none">Audition Schedule</h1>
+          <p className="text-sm tracking-[0.4em] uppercase text-primary mb-2">Mixed Company</p>
+          <h1 className="font-display text-7xl tracking-wide leading-none">Audition Schedule</h1>
         </div>
         <Link href="/dashboard" className={buttonVariants({ variant: 'outline', size: 'sm' })}>
           ← Dashboard

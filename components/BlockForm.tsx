@@ -100,8 +100,10 @@ export function BlockForm({ blocks }: { blocks: Block[] }) {
                     })}
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    {block.start_time} - {block.end_time} · {block.slot_duration}min slots ·{' '}
-                    {block.claimed}/{block.total} claimed
+                    {new Date(`1970-01-01T${block.start_time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    {' - '}
+                    {new Date(`1970-01-01T${block.end_time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    {' · '}{block.slot_duration}min slots · {block.claimed}/{block.total} claimed
                   </p>
                 </div>
                 <DeleteBlockButton blockId={block.id} />

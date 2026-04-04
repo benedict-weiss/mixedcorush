@@ -115,7 +115,7 @@ export function SlotList({
                         onClick={() => handleClaim(slot.id)}
                         disabled={isPending}
                       >
-                        {mySlotId ? 'Switch' : 'Claim'}
+                        {mySlotId ? 'Switch' : 'Select'}
                       </Button>
                     ) : null}
                   </div>

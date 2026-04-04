@@ -1,8 +1,7 @@
 'use client'
 
-import { useActionState } from 'react'
+import { useActionState, useRef } from 'react'
 import { assignVoicePart, type RusheeActionState } from '@/actions/rushees'
-import { Button } from '@/components/ui/button'
 import {
   Select,
   SelectContent,
@@ -33,6 +32,7 @@ function RusheeRow({ rushee }: { rushee: Rushee }) {
     assignVoicePart,
     undefined
   )
+  const formRef = useRef<HTMLFormElement>(null)
 
   return (
     <TableRow>
@@ -53,9 +53,15 @@ function RusheeRow({ rushee }: { rushee: Rushee }) {
         )}
       </TableCell>
       <TableCell>
-        <form action={action} className="flex items-center gap-2">
+        <form ref={formRef} action={action} className="flex items-center gap-2">
           <input type="hidden" name="rusheeId" value={rushee.id} />
-          <Select name="voicePart" defaultValue={rushee.voice_part ?? undefined}>
+          <Select
+            key={rushee.voice_part ?? ''}
+            name="voicePart"
+            defaultValue={rushee.voice_part ?? undefined}
+            onValueChange={() => setTimeout(() => formRef.current?.requestSubmit(), 0)}
+            disabled={pending}
+          >
             <SelectTrigger size="sm" className="w-32">
               <SelectValue placeholder="Assign…" />
             </SelectTrigger>
@@ -67,9 +73,6 @@ function RusheeRow({ rushee }: { rushee: Rushee }) {
               ))}
             </SelectContent>
           </Select>
-          <Button size="sm" type="submit" disabled={pending}>
-            {pending ? '…' : 'Save'}
-          </Button>
           {state?.error ? <span className="text-xs text-red-500">{state.error}</span> : null}
         </form>
       </TableCell>
