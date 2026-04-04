@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { getSignedUrl } from '@/actions/materials'
 import { Badge } from '@/components/ui/badge'
-import { buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button-variants'
 import { getAuthenticatedUser } from '@/lib/auth'
 import { createClient } from '@/lib/supabase/server'
 

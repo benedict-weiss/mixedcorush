@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { logOut } from '@/actions/auth'
-import { buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button-variants'
 import { requireAdmin } from '@/lib/auth'
 
 export default async function AdminLayout({
