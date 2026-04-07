@@ -1,7 +1,8 @@
 'use client'
 
 import { useActionState, useRef } from 'react'
-import { assignVoicePart, type RusheeActionState } from '@/actions/rushees'
+import { assignVoicePart, deleteRushee, type RusheeActionState } from '@/actions/rushees'
+import { Button } from '@/components/ui/button'
 import {
   Select,
   SelectContent,
@@ -28,11 +29,16 @@ type Rushee = {
 }
 
 function RusheeRow({ rushee }: { rushee: Rushee }) {
-  const [state, action, pending] = useActionState<RusheeActionState, FormData>(
+  const [assignState, assignAction, assignPending] = useActionState<RusheeActionState, FormData>(
     assignVoicePart,
     undefined
   )
+  const [deleteState, deleteAction, deletePending] = useActionState<RusheeActionState, FormData>(
+    async (_prev: RusheeActionState, _formData: FormData) => deleteRushee(rushee.id),
+    undefined
+  )
   const formRef = useRef<HTMLFormElement>(null)
+  const anyPending = assignPending || deletePending
 
   return (
     <TableRow>
@@ -53,14 +59,14 @@ function RusheeRow({ rushee }: { rushee: Rushee }) {
         )}
       </TableCell>
       <TableCell>
-        <form ref={formRef} action={action} className="flex items-center gap-2">
+        <form ref={formRef} action={assignAction} className="flex items-center gap-2">
           <input type="hidden" name="rusheeId" value={rushee.id} />
           <Select
             key={rushee.voice_part ?? ''}
             name="voicePart"
             defaultValue={rushee.voice_part ?? undefined}
             onValueChange={() => setTimeout(() => formRef.current?.requestSubmit(), 0)}
-            disabled={pending}
+            disabled={anyPending}
           >
             <SelectTrigger size="sm" className="w-32">
               <SelectValue placeholder="Assign…" />
@@ -73,7 +79,26 @@ function RusheeRow({ rushee }: { rushee: Rushee }) {
               ))}
             </SelectContent>
           </Select>
-          {state?.error ? <span className="text-xs text-red-500">{state.error}</span> : null}
+          {assignState?.error ? (
+            <span className="text-xs text-red-500">{assignState.error}</span>
+          ) : null}
+        </form>
+      </TableCell>
+      <TableCell>
+        <form
+          action={deleteAction}
+          onSubmit={(e) => {
+            if (!confirm(`Delete ${rushee.name}? This cannot be undone.`)) {
+              e.preventDefault()
+            }
+          }}
+        >
+          <Button size="sm" variant="destructive" type="submit" disabled={anyPending}>
+            {deletePending ? 'Deleting…' : 'Delete'}
+          </Button>
+          {deleteState?.error ? (
+            <span className="text-xs text-red-500 ml-2">{deleteState.error}</span>
+          ) : null}
         </form>
       </TableCell>
     </TableRow>
@@ -93,6 +118,7 @@ export function RusheeTable({ rushees }: { rushees: Rushee[] }) {
           <TableHead>Email</TableHead>
           <TableHead>Slot</TableHead>
           <TableHead>Voice Part</TableHead>
+          <TableHead></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

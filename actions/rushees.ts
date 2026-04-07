@@ -42,3 +42,35 @@ export async function assignVoicePart(
   revalidatePath('/admin/rushees')
   return { success: true }
 }
+
+export async function deleteRushee(rusheeId: string): Promise<RusheeActionState> {
+  await requireAdmin()
+
+  if (!z.string().uuid().safeParse(rusheeId).success) {
+    return { error: 'Invalid rushee ID.' }
+  }
+
+  const admin = createAdminClient()
+
+  // Verify target exists and is a RUSHEE (not an admin)
+  const { data: user } = await admin
+    .from('users')
+    .select('id')
+    .eq('id', rusheeId)
+    .eq('role', 'RUSHEE')
+    .single()
+
+  if (!user) {
+    return { error: 'Rushee not found.' }
+  }
+
+  // Deleting the auth user cascades to the users table and frees any held slot (ON DELETE SET NULL)
+  const { error } = await admin.auth.admin.deleteUser(rusheeId)
+
+  if (error) {
+    return { error: 'Failed to delete rushee.' }
+  }
+
+  revalidatePath('/admin/rushees')
+  return { success: true }
+}
