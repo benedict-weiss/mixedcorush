@@ -105,9 +105,10 @@ export async function moveFaq(
   }
 
   const admin = createAdminClient()
-  const { data: faqs } = await admin.from('faqs').select('id, sort_order').order('sort_order', {
-    ascending: true,
-  })
+  const { data: faqs } = await admin
+    .from('faqs')
+    .select('id, question, answer, sort_order')
+    .order('sort_order', { ascending: true })
 
   if (!faqs) {
     return { error: 'Could not load FAQs.' }
@@ -126,8 +127,15 @@ export async function moveFaq(
   const currentFaq = faqs[idx]
   const swapFaq = faqs[swapIdx]
 
-  await admin.from('faqs').update({ sort_order: swapFaq.sort_order }).eq('id', currentFaq.id)
-  await admin.from('faqs').update({ sort_order: currentFaq.sort_order }).eq('id', swapFaq.id)
+  // Single upsert statement so the swap is atomic
+  const { error } = await admin.from('faqs').upsert([
+    { ...currentFaq, sort_order: swapFaq.sort_order },
+    { ...swapFaq, sort_order: currentFaq.sort_order },
+  ])
+
+  if (error) {
+    return { error: 'Failed to reorder FAQs.' }
+  }
 
   revalidatePath('/admin/faqs')
   revalidatePath('/faq')

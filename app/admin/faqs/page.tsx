@@ -1,4 +1,5 @@
 import { FaqEditor } from '@/components/FaqEditor'
+import { requireAdmin } from '@/lib/auth'
 import { createAdminClient } from '@/lib/supabase/admin'
 
 type Faq = {
@@ -9,6 +10,7 @@ type Faq = {
 }
 
 export default async function AdminFaqsPage() {
+  await requireAdmin()
   const admin = createAdminClient()
 
   const { data: faqs } = await admin

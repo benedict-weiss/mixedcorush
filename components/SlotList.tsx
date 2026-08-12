@@ -9,7 +9,7 @@ type Slot = {
   id: string
   start_time: string
   end_time: string
-  rushee_id: string | null
+  taken: boolean
 }
 
 type Block = {
@@ -57,8 +57,8 @@ export function SlotList({
           <div className="space-y-2">
             {block.slots.map((slot) => {
               const isMine = slot.id === mySlotId
-              const isTaken = slot.rushee_id !== null && !isMine
-              const isAvailable = slot.rushee_id === null
+              const isTaken = slot.taken && !isMine
+              const isAvailable = !slot.taken
 
               return (
                 <div

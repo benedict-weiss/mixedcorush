@@ -1,4 +1,5 @@
 import { BlockForm } from '@/components/BlockForm'
+import { requireAdmin } from '@/lib/auth'
 import { createAdminClient } from '@/lib/supabase/admin'
 
 type SlotAgg = {
@@ -16,6 +17,7 @@ type BlockRow = {
 }
 
 export default async function AdminSlotsPage() {
+  await requireAdmin()
   const admin = createAdminClient()
 
   const { data: blocks } = await admin

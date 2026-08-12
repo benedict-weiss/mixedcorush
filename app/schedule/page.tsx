@@ -32,10 +32,19 @@ export default async function SchedulePage() {
     .eq('rushee_id', profile.id)
     .maybeSingle()
 
+  // Map rushee_id to a boolean before it reaches the client — other rushees'
+  // IDs never leave the server
   const normalizedBlocks = ((blocks as BlockRow[] | null) ?? []).map((block) => ({
     id: block.id,
     date: block.date,
-    slots: (block.audition_slots ?? []).sort((a, b) => a.start_time.localeCompare(b.start_time)),
+    slots: (block.audition_slots ?? [])
+      .sort((a, b) => a.start_time.localeCompare(b.start_time))
+      .map((slot) => ({
+        id: slot.id,
+        start_time: slot.start_time,
+        end_time: slot.end_time,
+        taken: slot.rushee_id !== null,
+      })),
   }))
 
   return (

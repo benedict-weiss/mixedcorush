@@ -1,4 +1,5 @@
 import { MaterialUploadForm } from '@/components/MaterialUploadForm'
+import { requireAdmin } from '@/lib/auth'
 import { createAdminClient } from '@/lib/supabase/admin'
 
 type Material = {
@@ -10,6 +11,7 @@ type Material = {
 }
 
 export default async function AdminMaterialsPage() {
+  await requireAdmin()
   const admin = createAdminClient()
 
   const { data: materials } = await admin

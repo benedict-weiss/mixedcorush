@@ -1,6 +1,8 @@
+import { requireAdmin } from '@/lib/auth'
 import { createAdminClient } from '@/lib/supabase/admin'
 
 export default async function AdminDashboardPage() {
+  await requireAdmin()
   const admin = createAdminClient()
 
   const [{ count: totalRushees }, { count: scheduledCount }, { count: unassignedCount }] =

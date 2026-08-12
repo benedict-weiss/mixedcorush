@@ -27,6 +27,18 @@ export async function getSignedUrl(
   }
 
   const admin = createAdminClient()
+
+  // Only sign paths that belong to a registered material — never arbitrary bucket paths
+  const { data: material } = await admin
+    .from('audition_materials')
+    .select('id')
+    .eq('storage_path', storagePath)
+    .maybeSingle()
+
+  if (!material) {
+    return { error: 'Could not access this file.' }
+  }
+
   const { data, error } = await admin.storage.from('materials').createSignedUrl(storagePath, 3600)
 
   if (error || !data?.signedUrl) {

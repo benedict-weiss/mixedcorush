@@ -1,4 +1,5 @@
 import { RusheeTable } from '@/components/RusheeTable'
+import { requireAdmin } from '@/lib/auth'
 import { createAdminClient } from '@/lib/supabase/admin'
 
 type RusheeRow = {
@@ -10,6 +11,7 @@ type RusheeRow = {
 }
 
 export default async function AdminRusheesPage() {
+  await requireAdmin()
   const admin = createAdminClient()
 
   const { data: rushees } = await admin
