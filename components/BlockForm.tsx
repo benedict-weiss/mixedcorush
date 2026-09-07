@@ -7,6 +7,19 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
+type Rushee = {
+  name: string
+  email: string
+  voice_part: string | null
+}
+
+type Slot = {
+  id: string
+  start_time: string
+  end_time: string
+  rushee: Rushee | null
+}
+
 type Block = {
   id: string
   date: string
@@ -15,6 +28,49 @@ type Block = {
   slot_duration: number
   total: number
   claimed: number
+  slots: Slot[]
+}
+
+function formatSlotTime(value: string) {
+  return new Date(value).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+}
+
+function SlotRoster({ slots }: { slots: Slot[] }) {
+  if (slots.length === 0) {
+    return null
+  }
+
+  return (
+    <details className="border-t px-4 py-3">
+      <summary className="cursor-pointer text-xs tracking-widest uppercase text-muted-foreground">
+        Who&apos;s scheduled
+      </summary>
+      <ul className="mt-3 space-y-1">
+        {slots.map((slot) => (
+          <li key={slot.id} className="flex items-baseline gap-3 text-sm">
+            <span className="w-32 shrink-0 tabular-nums text-muted-foreground">
+              {formatSlotTime(slot.start_time)}
+              {' – '}
+              {formatSlotTime(slot.end_time)}
+            </span>
+            {slot.rushee ? (
+              <span>
+                {slot.rushee.name}
+                <span className="text-muted-foreground">
+                  {' · '}
+                  {slot.rushee.email}
+                  {' · '}
+                  {slot.rushee.voice_part ?? 'No voice part'}
+                </span>
+              </span>
+            ) : (
+              <span className="text-muted-foreground">Open</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </details>
+  )
 }
 
 function DeleteBlockButton({ blockId }: { blockId: string }) {
@@ -90,23 +146,26 @@ export function BlockForm({ blocks }: { blocks: Block[] }) {
         ) : (
           <div className="space-y-3">
             {blocks.map((block) => (
-              <div key={block.id} className="flex items-center justify-between rounded-lg border p-4">
-                <div>
-                  <p className="font-medium">
-                    {new Date(`${block.date}T00:00:00`).toLocaleDateString([], {
-                      weekday: 'long',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {new Date(`1970-01-01T${block.start_time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                    {' - '}
-                    {new Date(`1970-01-01T${block.end_time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                    {' · '}{block.slot_duration}min slots · {block.claimed}/{block.total} claimed
-                  </p>
+              <div key={block.id} className="rounded-lg border">
+                <div className="flex items-center justify-between p-4">
+                  <div>
+                    <p className="font-medium">
+                      {new Date(`${block.date}T00:00:00`).toLocaleDateString([], {
+                        weekday: 'long',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {new Date(`1970-01-01T${block.start_time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      {' - '}
+                      {new Date(`1970-01-01T${block.end_time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      {' · '}{block.slot_duration}min slots · {block.claimed}/{block.total} claimed
+                    </p>
+                  </div>
+                  <DeleteBlockButton blockId={block.id} />
                 </div>
-                <DeleteBlockButton blockId={block.id} />
+                <SlotRoster slots={block.slots} />
               </div>
             ))}
           </div>
