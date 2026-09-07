@@ -43,7 +43,7 @@ function SlotRoster({ slots }: { slots: Slot[] }) {
   return (
     <details className="border-t px-4 py-3">
       <summary className="cursor-pointer text-xs tracking-widest uppercase text-muted-foreground">
-        Who&apos;s scheduled
+        Details
       </summary>
       <ul className="mt-3 space-y-1">
         {slots.map((slot) => (
