@@ -18,6 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { formatSlotDateTime } from '@/lib/format-time'
 import { VOICE_PARTS } from '@/lib/voice-parts'
 
 type Rushee = {
@@ -47,12 +48,7 @@ function RusheeRow({ rushee }: { rushee: Rushee }) {
       <TableCell>
         {rushee.audition_slots ? (
           <span className="text-sm">
-            {new Date(rushee.audition_slots.start_time).toLocaleString([], {
-              month: 'short',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-            })}
+            {formatSlotDateTime(rushee.audition_slots.start_time)}
           </span>
         ) : (
           <span className="text-muted-foreground text-sm">Unscheduled</span>

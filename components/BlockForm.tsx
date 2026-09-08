@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { formatBlockDate, formatSlotTime, formatWallClockTime } from '@/lib/format-time'
 
 type Rushee = {
   name: string
@@ -29,10 +30,6 @@ type Block = {
   total: number
   claimed: number
   slots: Slot[]
-}
-
-function formatSlotTime(value: string) {
-  return new Date(value).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 }
 
 function SlotRoster({ slots }: { slots: Slot[] }) {
@@ -150,16 +147,12 @@ export function BlockForm({ blocks }: { blocks: Block[] }) {
                 <div className="flex items-center justify-between p-4">
                   <div>
                     <p className="font-medium">
-                      {new Date(`${block.date}T00:00:00`).toLocaleDateString([], {
-                        weekday: 'long',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
+                      {formatBlockDate(block.date)}
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      {new Date(`1970-01-01T${block.start_time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      {formatWallClockTime(block.start_time)}
                       {' - '}
-                      {new Date(`1970-01-01T${block.end_time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      {formatWallClockTime(block.end_time)}
                       {' · '}{block.slot_duration}min slots · {block.claimed}/{block.total} claimed
                     </p>
                   </div>

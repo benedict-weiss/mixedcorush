@@ -4,6 +4,7 @@ import { useTransition } from 'react'
 import { claimSlot, releaseSlot } from '@/actions/slots'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { formatBlockDate, formatSlotTime } from '@/lib/format-time'
 
 type Slot = {
   id: string
@@ -48,11 +49,7 @@ export function SlotList({
       {blocks.map((block) => (
         <div key={block.id}>
           <h2 className="font-display text-2xl tracking-wide leading-none mb-4">
-            {new Date(`${block.date}T00:00:00`).toLocaleDateString([], {
-              weekday: 'long',
-              month: 'long',
-              day: 'numeric',
-            })}
+            {formatBlockDate(block.date)}
           </h2>
           <div className="space-y-2">
             {block.slots.map((slot) => {
@@ -76,15 +73,9 @@ export function SlotList({
                   )}
                   <div className="flex items-center gap-3 pl-1">
                     <span className="text-sm tabular-nums">
-                      {new Date(slot.start_time).toLocaleTimeString([], {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
+                      {formatSlotTime(slot.start_time)}
                       {' – '}
-                      {new Date(slot.end_time).toLocaleTimeString([], {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
+                      {formatSlotTime(slot.end_time)}
                     </span>
                     {isMine ? (
                       <Badge variant="default" className="text-xs tracking-widest uppercase">

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { logOut } from '@/actions/auth'
 import { buttonVariants } from '@/components/ui/button-variants'
 import { getAuthenticatedUser } from '@/lib/auth'
+import { formatSlotDate, formatSlotTime } from '@/lib/format-time'
 import { createClient } from '@/lib/supabase/server'
 
 export default async function DashboardPage() {
@@ -46,22 +47,12 @@ export default async function DashboardPage() {
           {mySlot ? (
             <>
               <p className="font-display text-4xl leading-tight tracking-wide">
-                {new Date(mySlot.start_time).toLocaleDateString([], {
-                  weekday: 'short',
-                  month: 'short',
-                  day: 'numeric',
-                })}
+                {formatSlotDate(mySlot.start_time)}
               </p>
               <p className="text-muted-foreground mt-2">
-                {new Date(mySlot.start_time).toLocaleTimeString([], {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
+                {formatSlotTime(mySlot.start_time)}
                 {' – '}
-                {new Date(mySlot.end_time).toLocaleTimeString([], {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
+                {formatSlotTime(mySlot.end_time)}
               </p>
             </>
           ) : (
